@@ -1,5 +1,7 @@
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MyList<E> {
     private int size = 0;
@@ -14,7 +16,7 @@ public class MyList<E> {
         elements = new Object[capacity];
     }
 
-    private void ensureCapa() {
+    private void ensureCapa() { //nếu không khai báo ensureCapa, khi nhập quá capacity 10 sẽ lỗi
         int newSize = elements.length * 2;
         elements = Arrays.copyOf(elements, newSize);
     }
@@ -41,6 +43,14 @@ public class MyList<E> {
         }
     }
 
+    public static List<MyList> cloneList(List<MyList> myLists ) { // clone Mylist
+        List<MyList> cloneList = new ArrayList<MyList>(myLists.size());
+        for (MyList myList : cloneList){
+            cloneList.add(new MyList());
+        }
+        return cloneList;
+    }
+
     public void remove(int index) {
         for (int i = index; i < size; i++) {
             elements[i] = elements[i + 1];
@@ -59,11 +69,11 @@ public class MyList<E> {
         return false;
     }
 
-    public int indexOf(E e) {
+    public String indexOf(E e) {
         for (int i = 0; i < size; i++) {
-            if (elements[i] == e) return i;
+            if (elements[i] == e) return ("the index of " +e + " is: " +i );
         }
-        return -1;
+        return ("not found");
     }
 
     public E get(int i) {
